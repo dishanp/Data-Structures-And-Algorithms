@@ -1,59 +1,34 @@
-/*
-WAP to count the number of occurrences of an element in a linked list of n nodes.
-*/
+//WAP to reverse the contents of a dynamic array of n elements
 #include <stdio.h>
 #include <stdlib.h>
-
-struct node
-{
-    int data;
-    struct node *next;
-}*first;
-
-void create(int A[], int n)
-{
-    struct node *t, *last;
-    first = (struct node*)malloc(sizeof(struct node));
-    first->data = A[0];
-    first->next = NULL;
-    last = first;
-
-    for(int i = 1 ; i < n ; i++)
-    {
-        t = (struct node*)malloc(sizeof(struct node));
-        t->data = A[i];
-        t->next = NULL;
-        last->next = t;
-        last = t;
-    }
-}
-
-void count_key(struct node *p, int key)
-{
-    int counter = 0;
-    while(p)
-    {
-        if(p->data == key)
-            counter++;
-        p = p->next;
-    }
-    printf("Occurences of %d : %d\n", key, counter);
-}
-
 int main()
 {
-    int n, key;
-    printf("Number of elements : ");
-    scanf("%d", &n);
-    int A[n];
-    printf("Enter elements : ");
-    for(int i = 0 ; i < n ; i++)
-    {
-        scanf("%d", &A[i]);
-    }
+      int i, j, n,*data;
+      printf("No of elements : ");
+      scanf("%d", &n);
+      data = (int*) calloc(n, sizeof(int));
+      if(data == NULL)
+      {
+            printf("Error");
+            return 1 ;
+      }
+      printf("\n");
+      for(i = 0; i < n; ++i)
+      {
+            printf("Enter Number %d: ", i + 1);
+            scanf("%d", data + i);
+      }
 
-    create(A, n);
-    printf("Enter key : ");
-    scanf("%d", &key);
-    count_key(first, key);
+      for (i = 0 , j = n-1; i < j ; i++, j--)
+      {
+            int temp = *(data + i) ;
+            *(data + i) = *(data + j) ;
+            *(data + j) = temp ;
+      }
+      printf("\n");
+      for(i = 0; i < n; ++i)
+      {
+            printf("%d", *(data + i));
+      }
+            printf("\n");
 }

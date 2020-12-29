@@ -1,81 +1,36 @@
-/*
-Given a linked list which is sorted, WAP to insert an element into the linked list in sorted way
-*/
-
+//Given an unsorted dynamic array of size n, WAP to find and display the number of elements between two elements a and b (both inclusive).
 #include <stdio.h>
 #include <stdlib.h>
-
-struct node
-{
-    int data;
-    struct node *next;
-}*first;
-
-void create(int A[], int n)
-{
-    struct node *t, *last;
-    first = (struct node*)malloc(sizeof(struct node));
-    first->data = A[0];
-    first->next = NULL;
-    last = first;
-
-    for(int i = 1 ; i < n ; i++)
-    {
-        t = (struct node*)malloc(sizeof(struct node));
-        t->data = A[i];
-        t->next = NULL;
-        last->next = t;
-        last = t;
-    }
-}
-
-void display(struct node *p)
-{
-    while(p)
-    {
-        printf("%d ", p->data);
-        p = p->next;
-    }
-    printf("\n");
-}
-
-void sortinsert(struct node *p, int key)
-{
-    struct node *t, *q;
-    t = (struct node *)malloc(sizeof(struct node));
-    t->data = key;
-
-    while(p && p->data < key)
-    {
-        q = p;
-        p = p->next;
-    }
-    //q points to node smaller than key and p points to node larger than key
-    if(p == first)
-    {
-        t->next = first;
-        first = t;
-    }
-    else
-    {
-        t->next = p;
-        q->next = t;
-    }
-}
-
 int main()
 {
-    int n, key;
-    printf("Number of elements : ");
-    scanf("%d", &n);
-    int A[n];
-    printf("Enter elements : ");
-    for(int i = 0 ; i < n ; i++)
-        scanf("%d", &A[i]);
-    create(A, n);
+      int i, n,*data, a, b;
+      printf("No of elements : ");
+      scanf("%d", &n);
+      data = (int*) calloc(n, sizeof(int));
+      if(data == NULL)
+      {
+            printf("Error");
+            return 1 ;
+      }
+      printf("\n");
+      for(i = 0; i < n; ++i)
+      {
+            printf("Enter Number %d: ", i + 1);
+            scanf("%d", data + i);
+      }
 
-    printf("Enter key : ");
-    scanf("%d", &key);
-    sortinsert(first, key);
-    display(first);
+      printf("Enter a : ");
+      scanf("%d", &a);
+      printf("Enter b : ");
+      scanf("%d", &b);
+
+      for(i = 0; i < n; ++i)
+      {
+            if(*(data + i) >= a && *(data + i) <= b)
+            {
+                  printf("%d\t", *(data + i));
+            }
+      }
+      printf ("\n");
+
 }
